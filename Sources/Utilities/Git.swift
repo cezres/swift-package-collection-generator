@@ -75,7 +75,7 @@ public struct GitURL {
 
     public static func from(_ gitURL: String) -> GitURL? {
         do {
-            let regex = try NSRegularExpression(pattern: #"([^/@]+)[:/]([^:/]+)/([^/.]+)(\.git)?$"#, options: .caseInsensitive)
+            let regex = try NSRegularExpression(pattern: #"([^/@]+)[:/]([^:/]+)/([^/(?!g)]+)(\.git)?$"#, options: .caseInsensitive)
             if let match = regex.firstMatch(in: gitURL, options: [], range: NSRange(location: 0, length: gitURL.count)) {
                 if let hostRange = Range(match.range(at: 1), in: gitURL),
                    let ownerRange = Range(match.range(at: 2), in: gitURL),
